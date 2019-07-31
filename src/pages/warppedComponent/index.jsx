@@ -1,4 +1,14 @@
 import React from "react";
-export default function WarppedComponent() {
-  return <div>高阶组件</div>;
-}
+
+const withUser = WrappedComponent => {
+  const user = "chen";
+  return props => <WrappedComponent user={user} {...props} />;
+};
+
+const UserPage = props => (
+  <div>
+    <p>My name is {props.user}!</p>
+  </div>
+);
+
+export default withUser(UserPage);

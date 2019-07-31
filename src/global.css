@@ -4,4 +4,5 @@ body {
 }
 ul li {
   list-style: none;
+  text-decoration-style: none;
 }
