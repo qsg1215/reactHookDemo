@@ -1,0 +1,16 @@
+.main {
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+}
+nav {
+  width: 25%;
+  border-right: 1px dashed red;
+}
+nav li {
+  line-height: 32px;
+}
+.content {
+  flex: 1;
+  padding: 10px 20px;
+}
