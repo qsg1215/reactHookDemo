@@ -1,25 +1,32 @@
 import React, { Component } from "react";
 import './home.css'
-import { data } from './dataBase/road1.js'
-const { BMap } = window;
+
 
 
 export default class Home extends Component {
   componentDidMount() {
-    let BmapK = new BMap.Map("map", { enableMapClick: false });
-    BmapK.centerAndZoom(new BMap.Point(103.26462, 29.762742), 13);
-    BmapK.enableScrollWheelZoom(false);
+    class Sleep {
+      constructor(timeout) {
+        this.timeout = timeout;
+      }
+      then(resolve, reject) {
+        const startTime = Date.now();
+        setTimeout(
+          () => resolve(Date.now() - startTime),
+          this.timeout
+        );
+      }
+    }
 
-
-    let pointList = [];
-    pointList = data.map(item => new BMap.Point(item.longitude, item.latitude))
-    var polyline = new BMap.Polyline(pointList,
-      { strokeColor: "blue", strokeWeight: 6, strokeOpacity: 0.5 }
-    );
-    BmapK.addOverlay(polyline);
+    (async () => {
+      const sleepTime = await new Sleep(3000);
+      console.log(sleepTime);
+    })();
   }
   render() {
-    return <div id="map">
+    return <div id="map" onClick={event => { console.log(event) }}    >
+
+    <input onChange={event => { console.log(event) }}  />
       测试案例1234
       </div>
   }
