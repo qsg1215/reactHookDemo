@@ -1,57 +1,41 @@
 import React, { Component } from "react";
 import './home.css'
-
+let i = 0;
 
 
 export default class Home extends Component {
-  spawn(genF) {
-    return new Promise(function (resolve, reject) {
-      const gen = genF();
-      //gen 迭代器
-      function step(nextF) {
 
-        let next;
-        try {
-          next = nextF();
-        } catch (e) {
-          return reject(e);
-        }
-        console.log(next)
-        if (next.done) {
-          return resolve(next.value);
-        } else {
-          Promise.resolve(next.value).then(function (v) {
-            step(function () { return gen.next(v); });
-          }, function (e) {
-            step(function () { return gen.throw(e); });
-          });
-        }
 
-      }
-      step(function () { return gen.next(); });
-    });
+
+  postData = () => {
+    i++
+    // 发送数据
+    let msg = JSON.stringify({
+      name: 'chen' + i,
+      sex: 'male'
+    })
+    // window.postMessage(msg);`
+    var data = { type: 'answerResult', data: msg };
+    let iframes = document.getElementsByClassName('iframe')
+    iframes[0].contentWindow.postMessage(data, '*');
+
+
+
   }
   componentDidMount() {
-    let ginerateFunc = function* () {
-      yield new Promise((reslove, reject) => { setTimeout(() => { reslove('1') }, 3000) })
-      yield new Promise((reslove, reject) => { setTimeout(() => { reslove('2') }, 3000) });
-      return 12
-    }
 
-    let beginTime = +(new Date)
+    //setInterval(() => { this.postData() }, 1000)
 
-    this.spawn(ginerateFunc).then(res => {
-      let endTime = +(new Date)
-      console.log(endTime - beginTime)
-      console.log(res)
-    })
+
+
+
 
 
 
   }
   render() {
-    return <div id="map"   >
-      123
+    return <div id="map">
+      <iframe className="iframe" style={{ height: '300px', width: '800px' }} src="http://localhost:8000"></iframe>
     </div>
   }
 
