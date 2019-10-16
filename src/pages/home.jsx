@@ -44,7 +44,8 @@ export default class Home extends Component {
   }
   render() {
     return <div id="map">
-      测试主页🐊    🐅   🦃
+      <iframe src="https://www.30ttq.com/hongyagaomiaozhen/" onLoad={this.handle} ></iframe>
+      测试主页
        </div >
   }
 
