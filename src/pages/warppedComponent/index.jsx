@@ -1,14 +1,11 @@
-import React from "react";
+import React, { Component } from "react";
+import wrapWithLoadData from './components/wrapWithLoadData'
 
-const withUser = WrappedComponent => {
-  const user = "chen";
-  return props => <WrappedComponent user={user} {...props} />;
-};
+class InputWithUserName extends Component {
+  render() {
+    return <input value={this.props.data} />
+  }
+}
 
-const UserPage = props => (
-  <div>
-    <p>My name is {props.user}!</p>
-  </div>
-);
-
-export default withUser(UserPage);
+InputWithUserName = wrapWithLoadData(InputWithUserName, 'username')
+export default InputWithUserName

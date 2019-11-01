@@ -1,19 +1,91 @@
-import React from "react";
-import Cat from "../../components/Cat";
-class DataProvider extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { target: "Zac" };
+import React, { Component } from "react";
+import PropTypes from 'prop-types';
+
+class Index extends Component {
+
+  static childContextTypes = {
+    themeColor: PropTypes.string
   }
+  constructor() {
+    super()
+    this.state = { themeColor: 'red' }
+  }
+
+  componentWillMount() {
+    setTimeout(() => {
+      this.setState({ themeColor: 'blue' })
+    }, 3000)
+  }
+
+  getChildContext() {
+    return { themeColor: this.state.themeColor }
+  }
+
   render() {
-    return <div>{this.props.children()}</div>;
+    return (
+      <div>
+        <Header />
+        <Main />
+      </div>
+    )
   }
 }
 
-export default function RenderProps() {
-  return (
-    <div>
-      <DataProvider>{data => <Cat target={"joe"} />}</DataProvider>
-    </div>
-  );
+class Header extends Component {
+  static contextTypes = {
+    themeColor: PropTypes.string
+  }
+  render() {
+    return (
+      <div>
+        <h2  style={{ color: this.context.themeColor }}>This is header</h2>
+        <Title />
+      </div>
+    )
+  }
 }
+
+class Title extends Component {
+
+  static contextTypes = {
+    themeColor: PropTypes.string
+  }
+
+  render() {
+    return (
+      <h1 style={{ color: this.context.themeColor }}>React.js 小书标题</h1>
+    )
+  }
+}
+
+class Content extends Component {
+  static contextTypes = {
+    themeColor: PropTypes.string
+  }
+  render() {
+    return (
+      <div>
+        <h2 style={{ color: this.context.themeColor }}>React.js 小书内容</h2>
+      </div>
+    )
+  }
+}
+
+
+class Main extends Component {
+  static contextTypes = {
+    themeColor: PropTypes.string
+  }
+  render() {
+    return (
+      <div>
+        <h2 style={{ color: this.context.themeColor }}>This is main</h2>
+        <Content />
+      </div>
+    )
+  }
+}
+
+
+
+export default Index

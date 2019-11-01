@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import Home from "../pages/home";
+import Comment from "../pages/comment/index.jsx";
+import CommentApp1 from "../pages/comment_redux/index.jsx";
 import RenderProps from "../pages/renderProps/index";
 import WarppedComponent from "../pages/warppedComponent/index";
 import EmptyLayout from "../layouts/emptyLayout";
@@ -15,7 +16,10 @@ function AppRouter() {
         <nav>
           <ul>
             <li>
-              <Link to="/">主页</Link>
+              <Link to="/">评论组件</Link>
+            </li>
+            <li>
+              <Link to="/commentApp/">评论组件(redux)</Link>
             </li>
             <li>
               <Link to="/renderProps/">渲染形组件</Link>
@@ -35,7 +39,7 @@ function AppRouter() {
               </li>
             </ul>
 
-            <li>
+            {/* <li>
               <Link to="/hook1">Hook1</Link>
             </li>
             <ul>
@@ -45,11 +49,12 @@ function AppRouter() {
               <li>
                 <Link to="/hook1/effectHook1">effectHook</Link>
               </li>
-            </ul>
+            </ul> */}
           </ul>
         </nav>
         <div className="content">
-          <Route path="/" exact component={Home} />
+          <Route path="/" exact component={Comment} />
+          <Route path="/commentApp/" component={CommentApp1} />
           <Route path="/renderProps/" component={RenderProps} />
           <Route path="/warppedComponent/" component={WarppedComponent} />
           <Route path="/hook/" component={EmptyLayout} />
@@ -59,8 +64,8 @@ function AppRouter() {
             <Route exact path="/hook/effectHook" component={EffectHook} />
           </Switch>
 
-          <Route path="/hook1/" re component={EmptyLayout} />
-          <Switch>
+          {/* <Route path="/hook1/" re component={EmptyLayout} /> */}
+          {/* <Switch>
             <Route
               exact
               path="/hook1/stateHook1"
@@ -71,7 +76,7 @@ function AppRouter() {
               path="/hook1/effectHook1"
               component={() => <div>effectHook1</div>}
             />
-          </Switch>
+          </Switch> */}
         </div>
       </div>
     </Router>
