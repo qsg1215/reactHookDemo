@@ -8,7 +8,7 @@ ReactDOM.render(<AppRouter />, rootElement);
 
 let appState = {
     title: {
-        text: 'React.js 小书',
+        text: 'React.js 小书1',
         color: 'red',
     },
     content: {
